@@ -15,3 +15,10 @@ eureka:
     registry-fetch-interval-seconds: 5 # eureka client间隔多久去拉取服务注册信息，默认为30秒 
   instance:
     lease-renewal-interval-in-seconds: 5 # eureka client发送心跳给server端的频率，默认为30秒 
+
+ribbon:
+  eager-load:
+    # 开启Ribbon的饥饿加载模式
+    enabled: true
+    # 开启Ribbon的饥饿加载模式
+    clients: rcp-loginverification-job,bbs-internal-api,bpl-user-api
