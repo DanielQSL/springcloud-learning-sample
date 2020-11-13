@@ -21,4 +21,4 @@ ribbon:
     # 开启Ribbon的饥饿加载模式
     enabled: true
     # 开启Ribbon的饥饿加载模式
-    clients: rcp-loginverification-job,bbs-internal-api,bpl-user-api
+  clients: cloud-payment-service1,cloud-payment-service2
