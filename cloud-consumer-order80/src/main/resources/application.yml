@@ -21,4 +21,4 @@ ribbon:
     # 开启Ribbon的饥饿加载模式
     enabled: true
     # 开启Ribbon的饥饿加载模式
-  clients: cloud-payment-service1,cloud-payment-service2
+    clients: cloud-payment-service1,cloud-payment-service2
