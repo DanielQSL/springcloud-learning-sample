@@ -12,10 +12,12 @@ eureka:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
 #      defaultZone: http://localhost:7001/eureka/
-    registry-fetch-interval-seconds: 5 # eureka client间隔多久去拉取服务注册信息，默认为30秒 
+    registry-fetch-interval-seconds: 5 # eureka client间隔多久去拉取服务注册信息，默认为30秒
   instance:
-    lease-renewal-interval-in-seconds: 5 # eureka client发送心跳给server端的频率，默认为30秒 
+    lease-renewal-interval-in-seconds: 5 # eureka client发送心跳给server端的频率，默认为30秒
+    initial-status: down
 
+# 不能完全解决。因为在发布时流量切换的瞬间，流量太大，并不是仅仅ribbon需要初始化，hystrix、web容器线程池等都需要初始化或者扩容，这里也需要耗时，所以这里的饥饿加载仅仅只是做到了发布时减少错误数。
 ribbon:
   eager-load:
     # 开启Ribbon的饥饿加载模式

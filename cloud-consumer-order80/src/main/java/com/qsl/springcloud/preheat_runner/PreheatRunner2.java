@@ -1,5 +1,6 @@
-package com.qsl.springcloud.client;
+package com.qsl.springcloud.preheat_runner;
 
+import com.netflix.appinfo.InstanceInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,11 +62,12 @@ public class PreheatRunner2 implements ApplicationRunner, ApplicationContextAwar
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        eurekaServiceRegistry.setStatus(eurekaRegistration, InstanceInfo.InstanceStatus.DOWN.name());
 //        //获取所依赖的下游微服务
 //        getApps();
         //预热
         preheatThread();
-        eurekaServiceRegistry.setStatus(eurekaRegistration, "UP");
+        eurekaServiceRegistry.setStatus(eurekaRegistration, InstanceInfo.InstanceStatus.UP.name());
     }
 
 //    /**

@@ -1,5 +1,6 @@
-package com.qsl.springcloud.client;
+package com.qsl.springcloud.preheat_runner;
 
+import com.netflix.appinfo.InstanceInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -29,12 +30,15 @@ public class PreheatRunner implements ApplicationRunner {
     public void run(ApplicationArguments applicationArguments) {
         long start = System.currentTimeMillis();
         try {
+            // 1、预热tomcat线程池
+            // 2、通过FeignClient调用所依赖的服务id的/info接口
+            // 3、业务逻辑预热
             Thread.sleep(30 * 1000);
         } catch (Exception e) {
-            log.error("预热接口出错", e);
+            log.error("warm up error", e);
         }
-        log.info("EurekaRegister time:{}", System.currentTimeMillis() - start);
-        eurekaServiceRegistry.setStatus(eurekaRegistration, "UP");
+        log.info("finish warm up. spend:{}", System.currentTimeMillis() - start);
+        eurekaServiceRegistry.setStatus(eurekaRegistration, InstanceInfo.InstanceStatus.UP.name());
     }
 
 }
